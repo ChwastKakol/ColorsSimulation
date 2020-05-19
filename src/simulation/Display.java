@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Display extends JFrame {
+    public static volatile boolean run = true;
     private int gridSizeX, gridSizeY;
     private float p, k;
 
@@ -28,12 +29,11 @@ public class Display extends JFrame {
         }
 
         for(int i = 0; i < blockCount; i++){
-            blocks[i].setNeighbour(blocks[(i + gridSizeX - 1) % gridSizeX], 0);
-            blocks[i].setNeighbour(blocks[(i + 1) % gridSizeX], 1);
-            blocks[i].setNeighbour(blocks[(i + blockCount - gridSizeX) % blockCount], 2);
-            blocks[i].setNeighbour(blocks[(i + gridSizeX) % blockCount], 3);
+            blocks[i].setNeighbour(blocks[i % gridSizeX == 0 ? i + gridSizeX - 1 : i -1], 0);
+            blocks[i].setNeighbour(blocks[(i + 1) % gridSizeX == 0 ? i - gridSizeX + 1 : i + 1], 1);
+            blocks[i].setNeighbour(blocks[i < gridSizeX ? i + blockCount - gridSizeX : i - gridSizeX], 2);
+            blocks[i].setNeighbour(blocks[i < blockCount - gridSizeX ? i + gridSizeX : i % gridSizeX], 3);
 
-            //blocks[i].start();
             Thread thread = new Thread(blocks[i]);
             thread.start();
         }

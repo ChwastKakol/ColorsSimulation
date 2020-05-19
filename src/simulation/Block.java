@@ -5,18 +5,18 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Block extends JPanel implements Runnable{
 
-    private final Object COLOR_LOCK = new Object();
-    private volatile Color color;
+    private final ReentrantReadWriteLock colorLock = new ReentrantReadWriteLock();
 
     private Random random = new Random();
     private final float p;
     private final long k;
 
     private final Object PAUSE_LOCK = new Object();
-    private boolean isPaused = false;
+    private volatile boolean isPaused = false;
 
     private Block[] neighbours = new Block[4];
 
@@ -29,8 +29,6 @@ public class Block extends JPanel implements Runnable{
 
         this.k = (long)(k *.5 + Math.abs(random.nextLong() % (long)k));
         this.p = p;
-
-        setBackground(color);
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -48,15 +46,22 @@ public class Block extends JPanel implements Runnable{
     }
 
     private void resetColor(){
-        synchronized (COLOR_LOCK) {
-            color = new Color(Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256));
-            setBackground(color);
+        colorLock.writeLock().lock();
+        try {
+            setBackground(new Color(Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256)));
+        }
+        finally {
+            colorLock.writeLock().unlock();
         }
     }
 
     public Color getColor(){
-        synchronized (COLOR_LOCK) {
+        colorLock.readLock().lock();
+        try {
             return getBackground();
+        }
+        finally {
+            colorLock.readLock().unlock();
         }
     }
 
@@ -74,9 +79,13 @@ public class Block extends JPanel implements Runnable{
             b += neighbourColor.getBlue();
         }
 
-        synchronized (COLOR_LOCK) {
-            color = new Color((int) (r / counter), (int) (g / counter), (int) (b / counter));
-            setBackground(color);
+        colorLock.writeLock().lock();
+        try {
+            if(counter != 0f)
+                setBackground(new Color((int) (r / counter), (int) (g / counter), (int) (b / counter)));
+        }
+        finally {
+            colorLock.writeLock().unlock();
         }
     }
 
@@ -86,7 +95,7 @@ public class Block extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (Display.run){
             try {
                 synchronized(PAUSE_LOCK){
                     if(isPaused){

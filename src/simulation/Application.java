@@ -5,7 +5,7 @@ public class Application {
     static final long timeBetweenFrames = 10L;
 
     public static void main(String[] args) {
-        int sizeX = 50, sizeY = 50, k = 10;
+        int sizeX = 20, sizeY = 15, k = 10;
         float p = .01f;
 
         if (args.length >= 2) {
