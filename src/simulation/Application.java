@@ -5,10 +5,10 @@ public class Application {
     static final long timeBetweenFrames = 10L;
 
     public static void main(String[] args) {
-        int sizeX = 20, sizeY = 20, k = 1000;
-        float p = .5f;
+        int sizeX = 50, sizeY = 50, k = 10;
+        float p = .01f;
 
-        if (args.length == 2) {
+        if (args.length >= 2) {
             try {
                 sizeX = Integer.getInteger(args[0]);
             }
@@ -20,6 +20,22 @@ public class Application {
             }
             catch (NumberFormatException e){
                 sizeY = 10;
+            }
+        }
+        if (args.length >= 3){
+            try {
+                k = Integer.getInteger(args[2]);
+            }
+            catch (NumberFormatException e){
+                k = 10;
+            }
+        }
+        if(args.length >= 4){
+            try {
+                p = Float.parseFloat(args[3]);
+            }
+            catch (NumberFormatException e){
+                p = .01f;
             }
         }
 

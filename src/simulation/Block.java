@@ -5,20 +5,17 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Block extends JPanel implements Runnable{
-    private final Lock lock = new ReentrantLock();
-    private Color color;
 
+    private final Object COLOR_LOCK = new Object();
+    private volatile Color color;
 
     private Random random = new Random();
     private final float p;
     private final long k;
-    private Thread thread;
 
-    private final Object LOCK = new Object();
+    private final Object PAUSE_LOCK = new Object();
     private boolean isPaused = false;
 
     private Block[] neighbours = new Block[4];
@@ -29,75 +26,78 @@ public class Block extends JPanel implements Runnable{
 
     public Block(float k, float p){
         resetColor();
+
         this.k = (long)(k *.5 + Math.abs(random.nextLong() % (long)k));
         this.p = p;
+
         setBackground(color);
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                //resetColor();
-                //repaint();
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        synchronized(LOCK) {
-                            isPaused = !isPaused;
-                            LOCK.notifyAll();
-                        }
-                    }
-                });
-                thread.run();
+                pauseUnpause();
             }
         });
     }
 
+    private void pauseUnpause(){
+        synchronized (PAUSE_LOCK){
+            isPaused = !isPaused;
+            PAUSE_LOCK.notifyAll();
+        }
+    }
+
     private void resetColor(){
-        lock.lock();
-        color = new Color(Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256));
-        lock.unlock();
-        setBackground(color);
+        synchronized (COLOR_LOCK) {
+            color = new Color(Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256));
+            setBackground(color);
+        }
     }
 
     public Color getColor(){
-        return getBackground(); //new Color(color.getRGB());
+        synchronized (COLOR_LOCK) {
+            return getBackground();
+        }
     }
 
     private void averageColor(){
         int r = 0, g = 0, b = 0;
+        float counter = 0f;
 
         for(int i = 0; i < 4; i++){
+            if (neighbours[i].getPaused()) continue;
+
+            counter += 1f;
             Color neighbourColor = neighbours[i].getColor();
             r += neighbourColor.getRed();
             g += neighbourColor.getGreen();
             b += neighbourColor.getBlue();
         }
 
-        lock.lock();
-        color = new Color((int)(r / 4.0), (int)(g / 4.0), (int)(b / 4.0));
-        lock.unlock();
-
-        setBackground(color);
+        synchronized (COLOR_LOCK) {
+            color = new Color((int) (r / counter), (int) (g / counter), (int) (b / counter));
+            setBackground(color);
+        }
     }
 
-    public void start(){
-        if(thread == null){
-            thread = new Thread(this, "Name");
-            thread.start();
-        }
+    public boolean getPaused(){
+        return isPaused;
     }
 
     @Override
     public void run() {
         while (true){
             try {
-                synchronized(LOCK){
-                    while(isPaused){
-                        wait();
+                synchronized(PAUSE_LOCK){
+                    if(isPaused){
+                        PAUSE_LOCK.wait();
                     }
                 }
-
+                // Sleeping for k milliseconds
                 Thread.sleep(k);
-                if(random.nextDouble() > p) {
+
+                // Resetting
+                if(random.nextDouble() < p) {
                     resetColor();
                 }
                 else {

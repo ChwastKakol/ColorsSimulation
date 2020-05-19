@@ -33,7 +33,9 @@ public class Display extends JFrame {
             blocks[i].setNeighbour(blocks[(i + blockCount - gridSizeX) % blockCount], 2);
             blocks[i].setNeighbour(blocks[(i + gridSizeX) % blockCount], 3);
 
-            blocks[i].start();
+            //blocks[i].start();
+            Thread thread = new Thread(blocks[i]);
+            thread.start();
         }
     }
 
