@@ -1,10 +1,21 @@
 package simulation;
 
+import java.util.Random;
+
+/**
+ * Application master class, contains main method
+ */
 public class Application {
     static Display display;
+    public static final Random random = new Random();
     static final long timeBetweenFrames = 10L;
     static final int blockPerSideLimit = 60;
 
+
+    /**
+     * Main method
+     * @param args app start parameters, if left empty the app will start with default parameters
+     */
     public static void main(String[] args) {
         int sizeX = 20, sizeY = 15, k = 10;
         float p = .01f;
@@ -46,6 +57,9 @@ public class Application {
         runLoop();
     }
 
+    /**
+     * App main loop, repaints simulation window in regular intervals
+     */
     private static void runLoop(){
         long time = System.currentTimeMillis();
         while(true){

@@ -1,0 +1,144 @@
+\hypertarget{classsimulation_1_1_block}{}\doxysection{simulation.\+Block Class Reference}
+\label{classsimulation_1_1_block}\index{simulation.Block@{simulation.Block}}
+Inheritance diagram for simulation.\+Block\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classsimulation_1_1_block}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_block_a3a16bfd35b05175b7cbd5e669ca87284}{set\+Neighbour}} (\mbox{\hyperlink{classsimulation_1_1_block}{Block}} block, int i)
+\item 
+\mbox{\hyperlink{classsimulation_1_1_block_ad6babb9e4ba2de7d99dde12d0959ddd8}{Block}} (long k, float p)
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_block_ae439092d7c0be92033de5011f66d6291}{stop}} ()
+\item 
+Color \mbox{\hyperlink{classsimulation_1_1_block_a2879100861fa4b0be9b8f7f46911f89d}{get\+Color}} ()
+\item 
+boolean \mbox{\hyperlink{classsimulation_1_1_block_ade3f995db85e4dcabb781042ec9f98f9}{get\+Paused}} ()
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_block_a65256d5bd698e4832b701596aaaec7ba}{run}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_block_a92a93a9949e2f235270c7d8c9aebf914}{pause\+Unpause}} ()
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_block_a8d9db5fe298e963ffac3a649d3eea004}{reset\+Color}} ()
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_block_a4e0959d7a9c174a4e98c0aa7b2f39e80}{average\+Color}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_block_a627df0d511b5e646dc9f5406faac3b82}\label{classsimulation_1_1_block_a627df0d511b5e646dc9f5406faac3b82}} 
+final Reentrant\+Read\+Write\+Lock {\bfseries color\+Lock} = new Reentrant\+Read\+Write\+Lock()
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_block_a3102741c3cc085c056e4ab44a3d63a26}\label{classsimulation_1_1_block_a3102741c3cc085c056e4ab44a3d63a26}} 
+final float {\bfseries p}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_block_a7af06f1ad7d9c227fac3d8c18c6bff08}\label{classsimulation_1_1_block_a7af06f1ad7d9c227fac3d8c18c6bff08}} 
+final long {\bfseries k}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_block_acb25f042839259a90d3970309df45432}\label{classsimulation_1_1_block_acb25f042839259a90d3970309df45432}} 
+final Object {\bfseries P\+A\+U\+S\+E\+\_\+\+L\+O\+CK} = new Object()
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_block_a7a8ba3b64ba4752f04144f5bdc214aa7}\label{classsimulation_1_1_block_a7a8ba3b64ba4752f04144f5bdc214aa7}} 
+volatile boolean {\bfseries is\+Paused} = false
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_block_ae7147e2f3b1f0462ce3cd88a19686aeb}\label{classsimulation_1_1_block_ae7147e2f3b1f0462ce3cd88a19686aeb}} 
+volatile boolean {\bfseries is\+Running} = true
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_block_ab70726dc8a87e76d42c59c00f9beef1a}\label{classsimulation_1_1_block_ab70726dc8a87e76d42c59c00f9beef1a}} 
+\mbox{\hyperlink{classsimulation_1_1_block}{Block}}\mbox{[}$\,$\mbox{]} {\bfseries neighbours} = new \mbox{\hyperlink{classsimulation_1_1_block}{Block}}\mbox{[}4\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Single simulation module 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsimulation_1_1_block_ad6babb9e4ba2de7d99dde12d0959ddd8}\label{classsimulation_1_1_block_ad6babb9e4ba2de7d99dde12d0959ddd8}} 
+\index{simulation.Block@{simulation.Block}!Block@{Block}}
+\index{Block@{Block}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{Block()}{Block()}}
+{\footnotesize\ttfamily simulation.\+Block.\+Block (\begin{DoxyParamCaption}\item[{long}]{k,  }\item[{float}]{p }\end{DoxyParamCaption})}
+
+Default constructor 
+\begin{DoxyParams}{Parameters}
+{\em k} & lifetime \\
+\hline
+{\em p} & mutation chance \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsimulation_1_1_block_a4e0959d7a9c174a4e98c0aa7b2f39e80}\label{classsimulation_1_1_block_a4e0959d7a9c174a4e98c0aa7b2f39e80}} 
+\index{simulation.Block@{simulation.Block}!averageColor@{averageColor}}
+\index{averageColor@{averageColor}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{averageColor()}{averageColor()}}
+{\footnotesize\ttfamily void simulation.\+Block.\+average\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+calculates and sets average colour based on colors of running neighbours \mbox{\Hypertarget{classsimulation_1_1_block_a2879100861fa4b0be9b8f7f46911f89d}\label{classsimulation_1_1_block_a2879100861fa4b0be9b8f7f46911f89d}} 
+\index{simulation.Block@{simulation.Block}!getColor@{getColor}}
+\index{getColor@{getColor}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily Color simulation.\+Block.\+get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+gets blocks colour \begin{DoxyReturn}{Returns}
+blocks color 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsimulation_1_1_block_ade3f995db85e4dcabb781042ec9f98f9}\label{classsimulation_1_1_block_ade3f995db85e4dcabb781042ec9f98f9}} 
+\index{simulation.Block@{simulation.Block}!getPaused@{getPaused}}
+\index{getPaused@{getPaused}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{getPaused()}{getPaused()}}
+{\footnotesize\ttfamily boolean simulation.\+Block.\+get\+Paused (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+gets running state \begin{DoxyReturn}{Returns}
+true if thread is running false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsimulation_1_1_block_a92a93a9949e2f235270c7d8c9aebf914}\label{classsimulation_1_1_block_a92a93a9949e2f235270c7d8c9aebf914}} 
+\index{simulation.Block@{simulation.Block}!pauseUnpause@{pauseUnpause}}
+\index{pauseUnpause@{pauseUnpause}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{pauseUnpause()}{pauseUnpause()}}
+{\footnotesize\ttfamily void simulation.\+Block.\+pause\+Unpause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+pauses and unpauses the thread \mbox{\Hypertarget{classsimulation_1_1_block_a8d9db5fe298e963ffac3a649d3eea004}\label{classsimulation_1_1_block_a8d9db5fe298e963ffac3a649d3eea004}} 
+\index{simulation.Block@{simulation.Block}!resetColor@{resetColor}}
+\index{resetColor@{resetColor}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{resetColor()}{resetColor()}}
+{\footnotesize\ttfamily void simulation.\+Block.\+reset\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+called upon mutation, sets block to new randomly picked color \mbox{\Hypertarget{classsimulation_1_1_block_a65256d5bd698e4832b701596aaaec7ba}\label{classsimulation_1_1_block_a65256d5bd698e4832b701596aaaec7ba}} 
+\index{simulation.Block@{simulation.Block}!run@{run}}
+\index{run@{run}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void simulation.\+Block.\+run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+overrides Runnable run method \mbox{\Hypertarget{classsimulation_1_1_block_a3a16bfd35b05175b7cbd5e669ca87284}\label{classsimulation_1_1_block_a3a16bfd35b05175b7cbd5e669ca87284}} 
+\index{simulation.Block@{simulation.Block}!setNeighbour@{setNeighbour}}
+\index{setNeighbour@{setNeighbour}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{setNeighbour()}{setNeighbour()}}
+{\footnotesize\ttfamily void simulation.\+Block.\+set\+Neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsimulation_1_1_block}{Block}}}]{block,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+sets neighbouring blocks for calculating average colour 
+\begin{DoxyParams}{Parameters}
+{\em block} & block to be considered neighbour \\
+\hline
+{\em i} & neighbour index (from 0 up to 3) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsimulation_1_1_block_ae439092d7c0be92033de5011f66d6291}\label{classsimulation_1_1_block_ae439092d7c0be92033de5011f66d6291}} 
+\index{simulation.Block@{simulation.Block}!stop@{stop}}
+\index{stop@{stop}!simulation.Block@{simulation.Block}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void simulation.\+Block.\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+stop blocks thread 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/piotr/\+Programing/\+Java/swing/\+Simulation/src/simulation/Block.\+java\end{DoxyCompactItemize}

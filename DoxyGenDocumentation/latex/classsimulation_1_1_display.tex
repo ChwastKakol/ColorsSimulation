@@ -1,0 +1,96 @@
+\hypertarget{classsimulation_1_1_display}{}\doxysection{simulation.\+Display Class Reference}
+\label{classsimulation_1_1_display}\index{simulation.Display@{simulation.Display}}
+Inheritance diagram for simulation.\+Display\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classsimulation_1_1_display}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsimulation_1_1_display_a84e447149e8548c1c6c88402ebc6797f}{Display}} (int sizeX, int sizeY, int k, float p)
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_display_a9dfd9f596f7c31d396b0a339005a7b26}{reset\+Simulation\+Panel}} (int sizeX, int sizeY, int k, float p)
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_display_a2d202299288ab03e395b65b75a96b223}{repaint\+Simulation\+Panel}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Package Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_display_a008365ef29e0d2860ba8a0bd65cf765d}\label{classsimulation_1_1_display_a008365ef29e0d2860ba8a0bd65cf765d}} 
+\mbox{\hyperlink{classsimulation_1_1_simulation_panel}{Simulation\+Panel}} {\bfseries simulation\+Panel}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_display_a2c80215d7ae236e9feae6bad001e0ad9}{add\+Menu\+Bar}} ()
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_display_a20046eb220ede57a2963b723f12ece57}{init}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+app main display 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsimulation_1_1_display_a84e447149e8548c1c6c88402ebc6797f}\label{classsimulation_1_1_display_a84e447149e8548c1c6c88402ebc6797f}} 
+\index{simulation.Display@{simulation.Display}!Display@{Display}}
+\index{Display@{Display}!simulation.Display@{simulation.Display}}
+\doxysubsubsection{\texorpdfstring{Display()}{Display()}}
+{\footnotesize\ttfamily simulation.\+Display.\+Display (\begin{DoxyParamCaption}\item[{int}]{sizeX,  }\item[{int}]{sizeY,  }\item[{int}]{k,  }\item[{float}]{p }\end{DoxyParamCaption})}
+
+Default Constructor 
+\begin{DoxyParams}{Parameters}
+{\em sizeX} & simulation width \\
+\hline
+{\em sizeY} & simulation height \\
+\hline
+{\em k} & simulation cell lifetime \\
+\hline
+{\em p} & mutation probability \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsimulation_1_1_display_a2c80215d7ae236e9feae6bad001e0ad9}\label{classsimulation_1_1_display_a2c80215d7ae236e9feae6bad001e0ad9}} 
+\index{simulation.Display@{simulation.Display}!addMenuBar@{addMenuBar}}
+\index{addMenuBar@{addMenuBar}!simulation.Display@{simulation.Display}}
+\doxysubsubsection{\texorpdfstring{addMenuBar()}{addMenuBar()}}
+{\footnotesize\ttfamily void simulation.\+Display.\+add\+Menu\+Bar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+add menu bar \mbox{\Hypertarget{classsimulation_1_1_display_a20046eb220ede57a2963b723f12ece57}\label{classsimulation_1_1_display_a20046eb220ede57a2963b723f12ece57}} 
+\index{simulation.Display@{simulation.Display}!init@{init}}
+\index{init@{init}!simulation.Display@{simulation.Display}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void simulation.\+Display.\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+initializes display \mbox{\Hypertarget{classsimulation_1_1_display_a2d202299288ab03e395b65b75a96b223}\label{classsimulation_1_1_display_a2d202299288ab03e395b65b75a96b223}} 
+\index{simulation.Display@{simulation.Display}!repaintSimulationPanel@{repaintSimulationPanel}}
+\index{repaintSimulationPanel@{repaintSimulationPanel}!simulation.Display@{simulation.Display}}
+\doxysubsubsection{\texorpdfstring{repaintSimulationPanel()}{repaintSimulationPanel()}}
+{\footnotesize\ttfamily void simulation.\+Display.\+repaint\+Simulation\+Panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+repaints simulation window \mbox{\Hypertarget{classsimulation_1_1_display_a9dfd9f596f7c31d396b0a339005a7b26}\label{classsimulation_1_1_display_a9dfd9f596f7c31d396b0a339005a7b26}} 
+\index{simulation.Display@{simulation.Display}!resetSimulationPanel@{resetSimulationPanel}}
+\index{resetSimulationPanel@{resetSimulationPanel}!simulation.Display@{simulation.Display}}
+\doxysubsubsection{\texorpdfstring{resetSimulationPanel()}{resetSimulationPanel()}}
+{\footnotesize\ttfamily void simulation.\+Display.\+reset\+Simulation\+Panel (\begin{DoxyParamCaption}\item[{int}]{sizeX,  }\item[{int}]{sizeY,  }\item[{int}]{k,  }\item[{float}]{p }\end{DoxyParamCaption})}
+
+Resets simulation to one with new paramters 
+\begin{DoxyParams}{Parameters}
+{\em sizeX} & new simulation width \\
+\hline
+{\em sizeY} & new simulation height \\
+\hline
+{\em k} & new simulation cell lifetime \\
+\hline
+{\em p} & new simulation mutation probability \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/piotr/\+Programing/\+Java/swing/\+Simulation/src/simulation/Display.\+java\end{DoxyCompactItemize}

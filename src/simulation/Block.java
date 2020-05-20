@@ -7,11 +7,13 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * Single simulation module
+ */
 public class Block extends JPanel implements Runnable{
 
     private final ReentrantReadWriteLock colorLock = new ReentrantReadWriteLock();
 
-    private Random random = new Random();
     private final float p;
     private final long k;
 
@@ -22,14 +24,25 @@ public class Block extends JPanel implements Runnable{
 
     private Block[] neighbours = new Block[4];
 
+    /**
+     * sets neighbouring blocks for calculating average colour
+     * @param block block to be considered neighbour
+     * @param i neighbour index (from 0 up to 3)
+     */
     public void setNeighbour(Block block, int i ){
+        if(i < 0 || i > 3) return;
         neighbours[i] = block;
     }
 
+    /**
+     * Default constructor
+     * @param k lifetime
+     * @param p mutation chance
+     */
     public Block(long k, float p){
         resetColor();
 
-        this.k = (long)(k *.5 + Math.abs(random.nextLong() % k));
+        this.k = (long)(k *.5 + Math.abs(Application.random.nextLong() % k));
         this.p = p;
 
         addMouseListener(new MouseAdapter() {
@@ -40,6 +53,9 @@ public class Block extends JPanel implements Runnable{
         });
     }
 
+    /**
+     * stop blocks thread
+     */
     public void stop(){
         synchronized (PAUSE_LOCK){
             isRunning = false;
@@ -48,6 +64,9 @@ public class Block extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * pauses and unpauses the thread
+     */
     private void pauseUnpause(){
         synchronized (PAUSE_LOCK){
             isPaused = !isPaused;
@@ -55,16 +74,23 @@ public class Block extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * called upon mutation, sets block to new randomly picked color
+     */
     private void resetColor(){
         colorLock.writeLock().lock();
         try {
-            setBackground(new Color(Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256), Math.abs(random.nextInt() % 256)));
+            setBackground(new Color(Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256)));
         }
         finally {
             colorLock.writeLock().unlock();
         }
     }
 
+    /**
+     * gets blocks colour
+     * @return blocks color
+     */
     public Color getColor(){
         colorLock.readLock().lock();
         try {
@@ -75,6 +101,9 @@ public class Block extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * calculates and sets average colour based on colors of running neighbours
+     */
     private void averageColor(){
         int r = 0, g = 0, b = 0;
         float counter = 0f;
@@ -99,10 +128,17 @@ public class Block extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * gets running state
+     * @return true if thread is running false otherwise
+     */
     public boolean getPaused(){
         return isPaused;
     }
 
+    /**
+     * overrides Runnable run method
+     */
     @Override
     public void run() {
         while (isRunning){
@@ -116,7 +152,7 @@ public class Block extends JPanel implements Runnable{
                 Thread.sleep(k);
 
                 // Resetting
-                if(random.nextDouble() < p) {
+                if(Application.random.nextDouble() < p) {
                     resetColor();
                 }
                 else {

@@ -1,0 +1,93 @@
+\hypertarget{classsimulation_1_1_simulation_panel}{}\doxysection{simulation.\+Simulation\+Panel Class Reference}
+\label{classsimulation_1_1_simulation_panel}\index{simulation.SimulationPanel@{simulation.SimulationPanel}}
+Inheritance diagram for simulation.\+Simulation\+Panel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classsimulation_1_1_simulation_panel}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsimulation_1_1_simulation_panel_a597d15f20849a82139e29989af73fb2f}{Simulation\+Panel}} (int sizeX, int sizeY, int k, float p)
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_simulation_panel_a3cb638b8395bf0a1847a1aeefaa2c492}{stop\+Simulation}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_a4764a6b73f1d74d38cdb1e95952f8296}\label{classsimulation_1_1_simulation_panel_a4764a6b73f1d74d38cdb1e95952f8296}} 
+static volatile boolean {\bfseries run} = true
+\end{DoxyCompactItemize}
+\doxysubsection*{Package Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_afc0e6135521369624b3f91d9e904095e}\label{classsimulation_1_1_simulation_panel_afc0e6135521369624b3f91d9e904095e}} 
+int {\bfseries grid\+SizeY}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_a99025b3a2ce4f27ad032d7e38933f95c}\label{classsimulation_1_1_simulation_panel_a99025b3a2ce4f27ad032d7e38933f95c}} 
+int {\bfseries k}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classsimulation_1_1_simulation_panel_a43f62d5e1c74f8ef74ab69cd51ed1ebc}{create\+Grid}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_a6a78d7f1276fa02ad96ef5eddc64e18a}\label{classsimulation_1_1_simulation_panel_a6a78d7f1276fa02ad96ef5eddc64e18a}} 
+Thread\mbox{[}$\,$\mbox{]} {\bfseries threads}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_af73b6dd8952d7f284e974904787abe8a}\label{classsimulation_1_1_simulation_panel_af73b6dd8952d7f284e974904787abe8a}} 
+\mbox{\hyperlink{classsimulation_1_1_block}{Block}}\mbox{[}$\,$\mbox{]} {\bfseries blocks}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_afec49b0c15c385bd86f25d59c463e98f}\label{classsimulation_1_1_simulation_panel_afec49b0c15c385bd86f25d59c463e98f}} 
+int {\bfseries grid\+SizeX}
+\item 
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_a6c745bae842083aedb066d564620ba87}\label{classsimulation_1_1_simulation_panel_a6c745bae842083aedb066d564620ba87}} 
+float {\bfseries p}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+simulation window 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_a597d15f20849a82139e29989af73fb2f}\label{classsimulation_1_1_simulation_panel_a597d15f20849a82139e29989af73fb2f}} 
+\index{simulation.SimulationPanel@{simulation.SimulationPanel}!SimulationPanel@{SimulationPanel}}
+\index{SimulationPanel@{SimulationPanel}!simulation.SimulationPanel@{simulation.SimulationPanel}}
+\doxysubsubsection{\texorpdfstring{SimulationPanel()}{SimulationPanel()}}
+{\footnotesize\ttfamily simulation.\+Simulation\+Panel.\+Simulation\+Panel (\begin{DoxyParamCaption}\item[{int}]{sizeX,  }\item[{int}]{sizeY,  }\item[{int}]{k,  }\item[{float}]{p }\end{DoxyParamCaption})}
+
+default constructor 
+\begin{DoxyParams}{Parameters}
+{\em sizeX} & simulation width \\
+\hline
+{\em sizeY} & simulation height \\
+\hline
+{\em k} & simulation cell lifetime \\
+\hline
+{\em p} & mutation probability \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsimulation_1_1_simulation_panel_a43f62d5e1c74f8ef74ab69cd51ed1ebc}\label{classsimulation_1_1_simulation_panel_a43f62d5e1c74f8ef74ab69cd51ed1ebc}} 
+\index{simulation.SimulationPanel@{simulation.SimulationPanel}!createGrid@{createGrid}}
+\index{createGrid@{createGrid}!simulation.SimulationPanel@{simulation.SimulationPanel}}
+\doxysubsubsection{\texorpdfstring{createGrid()}{createGrid()}}
+{\footnotesize\ttfamily void simulation.\+Simulation\+Panel.\+create\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+creates all simulation blocks \mbox{\Hypertarget{classsimulation_1_1_simulation_panel_a3cb638b8395bf0a1847a1aeefaa2c492}\label{classsimulation_1_1_simulation_panel_a3cb638b8395bf0a1847a1aeefaa2c492}} 
+\index{simulation.SimulationPanel@{simulation.SimulationPanel}!stopSimulation@{stopSimulation}}
+\index{stopSimulation@{stopSimulation}!simulation.SimulationPanel@{simulation.SimulationPanel}}
+\doxysubsubsection{\texorpdfstring{stopSimulation()}{stopSimulation()}}
+{\footnotesize\ttfamily void simulation.\+Simulation\+Panel.\+stop\+Simulation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+stops simulation, terminates all its threads 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/piotr/\+Programing/\+Java/swing/\+Simulation/src/simulation/Simulation\+Panel.\+java\end{DoxyCompactItemize}

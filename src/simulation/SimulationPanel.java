@@ -3,6 +3,9 @@ package simulation;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * simulation window
+ */
 public class SimulationPanel extends JPanel {
     public static volatile boolean run = true;
 
@@ -12,8 +15,14 @@ public class SimulationPanel extends JPanel {
     private int gridSizeX, gridSizeY, k;
     private float p;
 
+    /**
+     * default constructor
+     * @param sizeX simulation width
+     * @param sizeY simulation height
+     * @param k simulation cell lifetime
+     * @param p mutation probability
+     */
     public SimulationPanel(int sizeX, int sizeY, int k, float p){
-        //init();
         run = true;
         gridSizeX = sizeX;
         gridSizeY = sizeY;
@@ -22,6 +31,9 @@ public class SimulationPanel extends JPanel {
         createGrid();
     }
 
+    /**
+     * stops simulation, terminates all its threads
+     */
     public void stopSimulation(){
         run = false;
         for(int i = 0; i < blocks.length; i++){
@@ -36,6 +48,9 @@ public class SimulationPanel extends JPanel {
         }
     }
 
+    /**
+     * creates all simulation blocks
+     */
     private void createGrid(){
         int blockCount = gridSizeX * gridSizeY;
 

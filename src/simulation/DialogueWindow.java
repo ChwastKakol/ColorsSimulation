@@ -2,6 +2,9 @@ package simulation;
 
 import javax.swing.*;
 
+/**
+ * Dialogue Window created to restart application with new parameters
+ */
 public class DialogueWindow extends JDialog{
 
     private JTextField gridSizeXField, gridSizeYField, pField, kField;
@@ -10,6 +13,10 @@ public class DialogueWindow extends JDialog{
     int gridSizeX, gridSizeY, k;
     float p;
 
+    /**
+     * Default constructor
+     * @param parent Display parent object
+     */
     public DialogueWindow(Display parent){
         super(parent);
         display = parent;
@@ -17,6 +24,9 @@ public class DialogueWindow extends JDialog{
         init();
     }
 
+    /**
+     * initializes dialogue window
+     */
     private void init(){
         var pane = getContentPane();
         var layout = new GroupLayout(pane);
@@ -26,13 +36,13 @@ public class DialogueWindow extends JDialog{
         layout.setAutoCreateContainerGaps(true);
 
         var gridSizeXLabel = new JLabel("Simulation width:");
-        var gridSizeYLabel = new JLabel("Simulation width:");
+        var gridSizeYLabel = new JLabel("Simulation height:");
         var pLabel = new JLabel("Mutation chance (p):");
         var kLabel = new JLabel("Cell lifetime (k):");
 
-        gridSizeXField = new JTextField("10", 10);
-        gridSizeYField = new JTextField("10", 10);
-        pField = new JTextField("0.05", 10);
+        gridSizeXField = new JTextField("20", 10);
+        gridSizeYField = new JTextField("15", 10);
+        pField = new JTextField("0.01", 10);
         kField = new JTextField("10", 10);
 
         var button = new JButton("OK");
@@ -72,8 +82,14 @@ public class DialogueWindow extends JDialog{
 
         pack();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Simulation settings");
     }
 
+    /**
+     * validates data entered by the user
+     * @throws NumberFormatException thrown if entered data is not in correct format
+     * @throws DataException thrown if entered data is outside expected values
+     */
     private void validateData() throws NumberFormatException, DataException{
         gridSizeX = Integer.parseInt(gridSizeXField.getText());
         gridSizeY = Integer.parseInt(gridSizeYField.getText());
@@ -86,6 +102,9 @@ public class DialogueWindow extends JDialog{
         if(k < 1 ) throw new DataException();
     }
 
+    /**
+     * called by "OK" buttons action listener
+     */
     private void buttonAction(){
         try{
             validateData();
@@ -100,10 +119,16 @@ public class DialogueWindow extends JDialog{
         }
     }
 
+    /**
+     * shows error message after entering incorrect parameters
+     */
     private void showErrorMessage(){
         JOptionPane.showMessageDialog(this, "Entered parameters are incorrect, please enter correct parameters", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * exception thrown if entered data is outside expected values
+     */
     private class DataException extends Exception{
         DataException(){
             super();
