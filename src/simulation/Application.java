@@ -3,6 +3,7 @@ package simulation;
 public class Application {
     static Display display;
     static final long timeBetweenFrames = 10L;
+    static final int blockPerSideLimit = 60;
 
     public static void main(String[] args) {
         int sizeX = 20, sizeY = 15, k = 10;
@@ -10,13 +11,13 @@ public class Application {
 
         if (args.length >= 2) {
             try {
-                sizeX = Integer.getInteger(args[0]);
+                sizeX = Integer.parseInt(args[0]);
             }
             catch (NumberFormatException e){
                 sizeX = 10;
             }
             try {
-                sizeY = Integer.getInteger(args[1]);
+                sizeY = Integer.parseInt(args[1]);
             }
             catch (NumberFormatException e){
                 sizeY = 10;
@@ -24,7 +25,7 @@ public class Application {
         }
         if (args.length >= 3){
             try {
-                k = Integer.getInteger(args[2]);
+                k = Integer.parseInt(args[2]);
             }
             catch (NumberFormatException e){
                 k = 10;
@@ -50,7 +51,7 @@ public class Application {
         while(true){
             if(System.currentTimeMillis() > time + timeBetweenFrames){
                 time = System.currentTimeMillis();
-                display.repaint();
+                display.repaintSimulationPanel();
             }
         }
     }

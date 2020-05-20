@@ -4,39 +4,42 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Display extends JFrame {
-    public static volatile boolean run = true;
-    private int gridSizeX, gridSizeY;
-    private float p, k;
+    SimulationPanel simulationPanel;
 
-    public Display(int sizeX, int sizeY, float k, float p){
+    public Display(int sizeX, int sizeY, int k, float p){
         init();
-        gridSizeX = sizeX;
-        gridSizeY = sizeY;
-        this.p = p;
-        this.k = k;
-        createGrid();
+        simulationPanel = new SimulationPanel(sizeX, sizeY, k, p);
+
+        addMenuBar();
+        add(simulationPanel);
+
     }
 
-    private void createGrid(){
-        int blockCount = gridSizeX * gridSizeY;
+    public void resetSimulationPanel(int sizeX, int sizeY, int k, float p){
+        simulationPanel.stopSimulation();
+        remove(simulationPanel);
+        simulationPanel = new SimulationPanel(sizeX,sizeY,k,p);
+        add(simulationPanel);
+        revalidate();
+    }
 
-        setLayout(new GridLayout(gridSizeY, gridSizeX, 0, 0));
-        Block[] blocks = new Block[blockCount];
+    public void repaintSimulationPanel(){
+        simulationPanel.repaint();
+    }
 
-        for(int i = 0; i < blockCount; i++){
-            blocks[i] = new Block(k, p);
-            add(blocks[i]);
-        }
+    private void addMenuBar(){
+        var menu = new JMenuBar();
+        var settingsMenu = new JMenu("Settings");
+        var simulationSettings = new JMenuItem("Simulation Settings");
+        simulationSettings.addActionListener(event->{
+            var dialogue = new DialogueWindow(this);
+            dialogue.setVisible(true);
+        });
 
-        for(int i = 0; i < blockCount; i++){
-            blocks[i].setNeighbour(blocks[i % gridSizeX == 0 ? i + gridSizeX - 1 : i -1], 0);
-            blocks[i].setNeighbour(blocks[(i + 1) % gridSizeX == 0 ? i - gridSizeX + 1 : i + 1], 1);
-            blocks[i].setNeighbour(blocks[i < gridSizeX ? i + blockCount - gridSizeX : i - gridSizeX], 2);
-            blocks[i].setNeighbour(blocks[i < blockCount - gridSizeX ? i + gridSizeX : i % gridSizeX], 3);
+        settingsMenu.add(simulationSettings);
+        menu.add(settingsMenu);
 
-            Thread thread = new Thread(blocks[i]);
-            thread.start();
-        }
+        setJMenuBar(menu);
     }
 
     private void init(){

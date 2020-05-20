@@ -18,16 +18,18 @@ public class Block extends JPanel implements Runnable{
     private final Object PAUSE_LOCK = new Object();
     private volatile boolean isPaused = false;
 
+    private volatile boolean isRunning = true;
+
     private Block[] neighbours = new Block[4];
 
     public void setNeighbour(Block block, int i ){
         neighbours[i] = block;
     }
 
-    public Block(float k, float p){
+    public Block(long k, float p){
         resetColor();
 
-        this.k = (long)(k *.5 + Math.abs(random.nextLong() % (long)k));
+        this.k = (long)(k *.5 + Math.abs(random.nextLong() % k));
         this.p = p;
 
         addMouseListener(new MouseAdapter() {
@@ -36,6 +38,14 @@ public class Block extends JPanel implements Runnable{
                 pauseUnpause();
             }
         });
+    }
+
+    public void stop(){
+        synchronized (PAUSE_LOCK){
+            isRunning = false;
+            isPaused = false;
+            PAUSE_LOCK.notifyAll();
+        }
     }
 
     private void pauseUnpause(){
@@ -95,7 +105,7 @@ public class Block extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        while (Display.run){
+        while (isRunning){
             try {
                 synchronized(PAUSE_LOCK){
                     if(isPaused){
