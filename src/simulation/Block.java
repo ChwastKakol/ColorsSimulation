@@ -40,7 +40,7 @@ public class Block extends JPanel implements Runnable{
      * @param p mutation chance
      */
     public Block(long k, float p){
-        resetColor();
+        setBackground(new Color(Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256)));
 
         this.k = (long)(k *.5 + Math.abs(Application.random.nextLong() % k));
         this.p = p;
@@ -78,12 +78,14 @@ public class Block extends JPanel implements Runnable{
      * called upon mutation, sets block to new randomly picked color
      */
     private void resetColor(){
-        colorLock.writeLock().lock();
-        try {
-            setBackground(new Color(Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256)));
-        }
-        finally {
-            colorLock.writeLock().unlock();
+        synchronized (Block.class)
+        {
+            colorLock.writeLock().lock();
+            try {
+                setBackground(new Color(Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256), Math.abs(Application.random.nextInt() % 256)));
+            } finally {
+                colorLock.writeLock().unlock();
+            }
         }
     }
 
@@ -105,26 +107,28 @@ public class Block extends JPanel implements Runnable{
      * calculates and sets average colour based on colors of running neighbours
      */
     private void averageColor(){
-        int r = 0, g = 0, b = 0;
-        float counter = 0f;
+        synchronized(Block.class){
+            colorLock.writeLock().lock();
 
-        for(int i = 0; i < 4; i++){
-            if (neighbours[i].getPaused()) continue;
+            int r = 0, g = 0, b = 0;
+            float counter = 0f;
 
-            counter += 1f;
-            Color neighbourColor = neighbours[i].getColor();
-            r += neighbourColor.getRed();
-            g += neighbourColor.getGreen();
-            b += neighbourColor.getBlue();
-        }
+            for (int i = 0; i < 4; i++) {
+                if (neighbours[i].getPaused()) continue;
 
-        colorLock.writeLock().lock();
-        try {
-            if(counter != 0f)
-                setBackground(new Color((int) (r / counter), (int) (g / counter), (int) (b / counter)));
-        }
-        finally {
-            colorLock.writeLock().unlock();
+                counter += 1f;
+                Color neighbourColor = neighbours[i].getColor();
+                r += neighbourColor.getRed();
+                g += neighbourColor.getGreen();
+                b += neighbourColor.getBlue();
+            }
+
+            try {
+                if (counter != 0f)
+                    setBackground(new Color((int) (r / counter), (int) (g / counter), (int) (b / counter)));
+            } finally {
+                colorLock.writeLock().unlock();
+            }
         }
     }
 
